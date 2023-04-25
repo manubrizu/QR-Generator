@@ -1,0 +1,36 @@
+class MyGrid(GridLayout):
+    def __init__(self, **kwargs):
+        super(MyGrid, self).__init__(**kwargs)
+        self.cols = 1
+
+        self.inside = GridLayout()
+        self.inside.cols = 2
+
+
+        self.inside.add_widget(Label(text='Nombre: '))
+        self.nombre = TextInput(multiline = False)
+        self.inside.add_widget(self.nombre)
+
+        self.inside.add_widget(Label(text='Apellido: '))
+        self.apellido = TextInput(multiline = False)
+        self.inside.add_widget(self.apellido)
+        
+        self.inside.add_widget(Label(text='Mail: '))
+        self.mail = TextInput(multiline = False)
+        self.inside.add_widget(self.mail)
+
+        self.add_widget(self.inside)
+
+        self.enviar = Button(text='Enviar', font_size = 40)
+        self.enviar.bind(on_press = self.pressed)
+        self.add_widget(self.enviar)
+
+    def pressed(self, instance):
+        nombre = self.nombre.text
+        apellido = self.apellido.text
+        mail = self.mail.text
+
+        print("Nombre: ", nombre, "Apellido: ", apellido, "Mail: ", mail)
+        self.nombre.text = ""
+        self.apellido.text = ""
+        self.mail.text = ""
